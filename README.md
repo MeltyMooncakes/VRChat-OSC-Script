@@ -17,3 +17,5 @@ Run `pnpm install` to install packages.
 ```bash
 pnpm test
 ```
+
+Working media players (put in conifg exactly as listed): `VLC`, `YoutubeMusic`

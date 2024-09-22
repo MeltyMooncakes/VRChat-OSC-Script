@@ -8,6 +8,7 @@ const bus = sessionBus();
 const MusicPlayerTypes = {
 	"YoutubeMusic": "org.mpris.MediaPlayer2.YoutubeMusic",
 	"Firefox": "org.mpris.MediaPlayer2.Firefox",
+	"VLC": "org.mpris.MediaPlayer2.vlc",
 }
 
 class _BlankSong {
