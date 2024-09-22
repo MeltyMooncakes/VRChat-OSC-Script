@@ -1,4 +1,3 @@
-import OSC from "osc-js";
 import { Client } from ".";
 
 export class OSCChatbox {

@@ -1,4 +1,3 @@
-import OSC from "osc-js";
 import { musicEmojis, makeProgressBar } from "./misc";
 import Line from "./config";
 import { readFileSync } from "fs";
