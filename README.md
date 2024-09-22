@@ -2,6 +2,14 @@
 
 unsure if this works on windows.
 
+---
+## Installing
 ```bash
-pnpm install && pnpm test
+paru -Sy typescript youtube-music-bin pnpm nodejs
+pnpm install
+```
+---
+## Running
+```bash
+pnpm test
 ```
