@@ -10,6 +10,7 @@ pnpm install
 ```
 ---
 ## Running
+IMPORTANT NOTE: requires youtube music app to be running and the shortcuts(MPRIS) plugin to be enabled.
 ```bash
 pnpm test
 ```
