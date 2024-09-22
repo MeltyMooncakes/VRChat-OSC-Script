@@ -1,0 +1,47 @@
+{
+	"minimalBackground": true,
+	"lines": [
+		{
+			"interval": 6e3,
+			"order": "normal",
+			"messages": [
+				"silly car",
+				"im EVIL",
+				"i hate everyone",
+				"i am BITING YOU"
+			]
+		},
+		{
+			"interval": 1e3,
+			"order": "normal",
+			"messages": [
+				"My time is {time}"
+			]
+		},
+		{
+			"interval": 100,
+			"order": "normal",
+			"messages": [
+				"{music}"
+			]
+		},
+		{
+			"interval": 5e3,
+			"order": "normal",
+			"messages": [
+				"{musicProgressBar}",
+				"CPU: {cpuTemp}",
+				"CPU: {cpuName}"
+			]
+		},
+		{
+			"interval": 5e3,
+			"order": "normal",
+			"messages": [
+				"{musicPosition}",
+				"RAM: {ramUsed} / {ramTotal}",
+				"GPU: {gpuName}"
+			]
+		}
+	]
+}
