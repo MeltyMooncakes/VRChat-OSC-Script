@@ -12,5 +12,16 @@ interface ConfigData {
 	 */
 	minimalBackground: boolean;
 
+	/**
+	 * The kind of music player you use.
+	 * These are the only supported ones as of now.
+	 */
+	mediaplayer: "YoutubeMusic" | "Firefox";
+
 	lines: ConfigLine[];
 };
+
+interface data {
+    baz: number;
+    [key: string]: any;
+}

@@ -18,13 +18,14 @@ export class Client {
 	music: Music;
 
 	constructor() {
+		this.config = JSON.parse(readFileSync("./config.json", "utf-8"));
+
 		// @ts-ignore
 		this.socket = new osc.Client("127.0.0.1", "9000");
 		this.chatbox = new OSCChatbox(this);
-		this.music = new Music();
+		this.music = new Music(this.config);
 
 
-		this.config = JSON.parse(readFileSync("./config.json", "utf-8"));
 		const lines = this.config.lines.map(data => new Line(data));
 
 		this.interval = setInterval(async () => {
@@ -57,7 +58,7 @@ export class Client {
 		const song = await this.music.getSong();
 
 		const timeString = `${hours === 0 ? 12 : hours}:${minutes.length === 1 ? "0" : ""}${minutes} ${twelvehour}`,
-			musicString = `${musicEmojis[await this.music.getPlaybackStatus()]} ${song.artist.join(" & ")} - ${song.title}`;
+			musicString = `${musicEmojis[await this.music.getPlaybackStatus()]} ${[song.artist].flat().join(" & ")} - ${song.title}`;
 
 		let msg = message
 			.replace(/\{time\}/g, timeString)

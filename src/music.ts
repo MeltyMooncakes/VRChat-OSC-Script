@@ -3,10 +3,23 @@ import { msToString } from "./misc";
 
 const bus = sessionBus();
 
-interface data {
-    baz: number;
-    [key: string]: any;
+
+
+const MusicPlayerTypes = {
+	"YoutubeMusic": "org.mpris.MediaPlayer2.YoutubeMusic",
+	"Firefox": "org.mpris.MediaPlayer2.Firefox",
 }
+
+class _BlankSong {
+	title = "Unknown";
+	artist = ["Unknown"];
+	album = "Unknown";
+	url = "Unknown";
+	length = 0;
+	stringLength = "0:00";
+}
+
+const BlankSong = new _BlankSong();
 
 export class Song {
 	title: string;
@@ -26,48 +39,73 @@ export class Song {
 		this.url = data.value["xesam:url"]?.value || "Unknown";
 
 		// @ts-ignore
-		this.length = parseInt(data.value["mpris:length"].value / 1000n);
+		this.length = parseInt((data.value["mpris:length"]?.value || 0n) / 1000n);
 
 		this.stringLength = msToString(this.length);
 	}
 }
 
 export default class Music {
-	proxy: ProxyObject;
+	// proxy: ProxyObject;
 	interface: ClientInterface;
+	config: ConfigData;
 
-	constructor() {
-		this._init();
+	constructor(config: ConfigData) {
+		this.config = config;
+		this.getInterface();
 	}
 
-	async _init() {
-		this.proxy = await bus.getProxyObject("org.mpris.MediaPlayer2.YoutubeMusic", "/org/mpris/MediaPlayer2");
-		this.interface = this.proxy.getInterface("org.freedesktop.DBus.Properties");
-	}
+	hasInterface = false;
 
-	async getProperty(name: string) {
+	async getInterface() {
 		try {
-			return await this.interface.Get("org.mpris.MediaPlayer2.Player", name);
+			const proxy = await bus.getProxyObject(MusicPlayerTypes[this.config.mediaplayer], "/org/mpris/MediaPlayer2");
+			this.hasInterface = true;
+			this.interface = proxy.getInterface("org.freedesktop.DBus.Properties");
 		} catch (e) {
-			this._init();
-			return await (this.interface.Get("org.mpris.MediaPlayer2.Player", name).catch(() => { return {} }));
+			this.hasInterface = false;
 		}
 	}
 
+	async getProperty(name: string) {
+		await this.getInterface();
+		if (this.hasInterface) {
+			return await this.interface.Get("org.mpris.MediaPlayer2.Player", name);
+		}
+		return "Unknown";
+	}
+
 	async getSong() {
-		return new Song(await this.getProperty("Metadata"));
+		await this.getInterface();
+		if (this.hasInterface) {
+			return new Song(await this.getProperty("Metadata"));
+		}
+		return BlankSong;
 	}
 
 	async getPosition() {
-		const pos = Number((await this.interface.Get("org.mpris.MediaPlayer2.Player", "Position")).value / 1000n);
+		await this.getInterface();
+		if (this.hasInterface) {
+			const pos = Number((await this.interface.Get("org.mpris.MediaPlayer2.Player", "Position")).value / 1000n);
+	
+			return {
+				value: pos,
+				string: msToString(pos),
+			};
+		}
 
 		return {
-			value: pos,
-			string: msToString(pos),
+			value: 0,
+			string: "0:00",
 		};
 	}
 
 	async getPlaybackStatus(): Promise<"Playing" | "Paused" | "Stopped"> {
-		return (await this.interface.Get("org.mpris.MediaPlayer2.Player", "PlaybackStatus")).value;
+		await this.getInterface();
+		if (this.hasInterface) {
+			return (await this.interface.Get("org.mpris.MediaPlayer2.Player", "PlaybackStatus")).value;
+		}
+
+		return "Stopped";
 	}
 };
