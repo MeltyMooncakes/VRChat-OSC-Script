@@ -15,7 +15,8 @@
 	"private": true,
 	"scripts": {
 		"start": "node ./dist/index.js",
-		"test": "tsc && pnpm start"
+		"test": "tsc && pnpm start",
+		"build": "pnpm install && tsc"
 	},
 	"devDependencies": {
 		"@types/node": "^22.5.5",

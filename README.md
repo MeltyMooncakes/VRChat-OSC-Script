@@ -11,7 +11,7 @@
 paru -Sy typescript pnpm nodejs git
 git clone https://github.com/MeltyMoon/VRChat-OSC-Script
 cd VRChat-OSC-Script
-pnpm install
+pnpm build
 ```
 <br>
 
@@ -21,7 +21,7 @@ Make sure you install [Git](https://git-scm.com/download/win) and [NodeJS](https
 npm install -G typescript pnpm
 git clone https://github.com/MeltyMoon/VRChat-OSC-Script
 cd VRChat-OSC-Script
-pnpm install
+pnpm build
 ```
 
 ---
