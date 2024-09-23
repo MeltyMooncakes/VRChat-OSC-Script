@@ -3,18 +3,31 @@
 
 ---
 
-### Dependancies
-#### Arch
+## Installing
+
+
+### Arch
 ```bash
 paru -Sy typescript pnpm nodejs git
+git clone https://github.com/MeltyMoon/VRChat-OSC-Script
+cd VRChat-OSC-Script
+pnpm install
 ```
+<br>
 
-Run `pnpm install` to install packages.
+### Windows
+Make sure you install [Git](https://git-scm.com/download/win) and [NodeJS](https://nodejs.org/en/download), then run:
+```cmd
+npm install -G typescript pnpm
+git clone https://github.com/MeltyMoon/VRChat-OSC-Script
+cd VRChat-OSC-Script
+pnpm install
+```
 
 ---
 ## Running
 ```bash
-pnpm test
+pnpm start
 ```
 
 Media players will NOT work on windows at the current moment, if you are running windows, please help implement it.
