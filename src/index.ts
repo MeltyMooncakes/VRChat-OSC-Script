@@ -1,10 +1,9 @@
-import { musicEmojis, makeProgressBar } from "./misc";
-import Line from "./config";
+
 import { readFileSync } from "fs";
 import { OSCChatbox } from "./chatbox";
-import { cpu, cpuTemperature, mem, graphics } from "systeminformation";
 import osc from "node-osc"
 import Music from "./music";
+import Line from "./config";
 
 export class Client {
 	socket: osc.Client;
@@ -34,7 +33,7 @@ export class Client {
 
 			if ((Date.now() - this.lastSent) > 1500) {
 				this.lastSent = Date.now();
-				this.chatbox.send(`${await this.formatMessage(lines.map(l => l.getMessage()).join("\n"))}`, true);
+				this.chatbox.send(`${await Line.formatMessage(this, lines.map(l => l.getMessage()).join("\n"))}`, true);
 			}
 		}, 100);
 	}
@@ -45,38 +44,6 @@ export class Client {
 
 	connect(): Client {
 		return this;
-	}
-
-	async formatMessage(message: string): Promise<string> {
-		// Music stuff
-		const song = await this.music.getSong();
-
-		const musicString = `${musicEmojis[await this.music.getPlaybackStatus()]} ${[song.artist].flat().join(" & ")} - ${song.title}`;
-
-		let msg = message
-			.replace(/\{time\}/g, new Intl.DateTimeFormat("en-US", { minute: "numeric", hour: "numeric" }).format(new Date()))
-			.replace(/\{musicPosition\}/g, `${(await this.music.getPosition()).string}/${song.stringLength}`)
-			.replace(/\{musicProgressBar\}/g, `[${makeProgressBar((await this.music.getPosition()).value, song.length, 15)}]`)
-			.replace(/\{cpuTemp\}/g, `${(await cpuTemperature()).main}°C`)
-			.replace(/\{cpuName\}/g,
-				`${(await cpu()).brand}`
-					.replace(/([0-9]+\-core|processor)/gi, "")
-			)
-			.replace(/\{gpuName\}/g, `${(await graphics()).controllers[0].model}`)
-			.replace(/\{ramTotal\}/g, `${((await mem()).total / 1.074e+9).toFixed(2)}GiB`)
-			.replace(/\{ramUsed\}/g, `${((await mem()).active / 1.074e+9).toFixed(2)}GiB`);
-		msg = `${msg}${this.config.minimalBackground ? "\u0003\u001f" : ""}`;
-
-		// BETTER WAY: get remaining available length before and put it there using regex                                                
-		msg = msg.replace(
-			/\{music\}/g,
-			musicString.slice(
-				0,
-				msg.replace(/\{music\}/g, musicString).length > 144
-					? 144 - msg.replace(/\{music\}/g, musicString).length
-					: musicString.length
-			));
-		return msg;
 	}
 };
 
