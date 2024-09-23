@@ -7,7 +7,7 @@ unsure if this works on windows.
 ### Dependancies
 #### Arch
 ```bash
-paru -Sy typescript pnpm nodejs
+paru -Sy typescript pnpm nodejs git
 ```
 
 Run `pnpm install` to install packages.
