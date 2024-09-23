@@ -1,6 +1,5 @@
 # Just a silly little script for VRChat OSC Chatbox
 
-unsure if this works on windows.
 
 ---
 
@@ -18,4 +17,5 @@ Run `pnpm install` to install packages.
 pnpm test
 ```
 
+Media players will NOT work on windows at the current moment, if you are running windows, please help implement it.
 Working media players (put in conifg exactly as listed): `VLC`, `YoutubeMusic`

@@ -1,8 +1,6 @@
-import { ClientInterface, ProxyObject, sessionBus } from "dbus-next"
+import { ClientInterface, MessageBus, ProxyObject, sessionBus } from "dbus-next"
 import { msToString } from "./misc";
-
-const bus = sessionBus();
-
+import { platform } from "os";
 
 
 const MusicPlayerTypes = {
@@ -50,17 +48,29 @@ export default class Music {
 	// proxy: ProxyObject;
 	interface: ClientInterface;
 	config: ConfigData;
+	platform = platform();
+	bus: MessageBus;
 
 	constructor(config: ConfigData) {
 		this.config = config;
-		this.getInterface();
+
+		if (this.platform === "linux") {
+			this.bus = sessionBus();
+			this.getInterface();
+		} else {
+			console.warn("NOTE: Music information is not currently supported on windows.");
+		}
 	}
 
 	hasInterface = false;
 
 	async getInterface() {
+		if (this.platform !== "linux") {
+			return;
+		}
+		
 		try {
-			const proxy = await bus.getProxyObject(MusicPlayerTypes[this.config.mediaplayer], "/org/mpris/MediaPlayer2");
+			const proxy = await this.bus.getProxyObject(MusicPlayerTypes[this.config.mediaplayer], "/org/mpris/MediaPlayer2");
 			this.hasInterface = true;
 			this.interface = proxy.getInterface("org.freedesktop.DBus.Properties");
 		} catch (e) {
