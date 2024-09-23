@@ -48,19 +48,13 @@ export class Client {
 	}
 
 	async formatMessage(message: string): Promise<string> {
-		const date = new Date(),
-			twelvehour = date.getHours() > 11 ? "PM" : "AM",
-			hours = date.getHours() - (twelvehour === "PM" ? 12 : 0),
-			minutes = `${date.getMinutes()}`;
-
 		// Music stuff
 		const song = await this.music.getSong();
 
-		const timeString = `${hours === 0 ? 12 : hours}:${minutes.length === 1 ? "0" : ""}${minutes} ${twelvehour}`,
-			musicString = `${musicEmojis[await this.music.getPlaybackStatus()]} ${[song.artist].flat().join(" & ")} - ${song.title}`;
+		const musicString = `${musicEmojis[await this.music.getPlaybackStatus()]} ${[song.artist].flat().join(" & ")} - ${song.title}`;
 
 		let msg = message
-			.replace(/\{time\}/g, timeString)
+			.replace(/\{time\}/g, new Intl.DateTimeFormat("en-US", { minute: "numeric", hour: "numeric" }).format(new Date()))
 			.replace(/\{musicPosition\}/g, `${(await this.music.getPosition()).string}/${song.stringLength}`)
 			.replace(/\{musicProgressBar\}/g, `[${makeProgressBar((await this.music.getPosition()).value, song.length, 15)}]`)
 			.replace(/\{cpuTemp\}/g, `${(await cpuTemperature()).main}°C`)
