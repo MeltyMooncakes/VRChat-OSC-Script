@@ -20,7 +20,7 @@ export class Client {
 		
 	constructor() {
 		// @ts-expect-error
-		this.config = parse(readFileSync("./config.json", "utf-8"));
+		this.config = parse(readFileSync("./config.toml", "utf-8"));
 
 		this.chatbox = new OSCChatbox(this);
 		this.music = new Music(this.config);
