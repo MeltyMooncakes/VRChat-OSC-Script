@@ -48,6 +48,8 @@ export default class Line {
 		const song = await client.music.getSong();
 
 		const musicString = `${musicEmojis[await client.music.getPlaybackStatus()]} ${[song.artist].flat().join(" & ")} - ${song.title}`;
+		const ramTotal = Number(((await mem()).total / 1.074e+9).toFixed(2)),
+			ramUsed = Number(((await mem()).active / 1.074e+9).toFixed(2));
 
 		let msg = message
 			.replace(/\{time\}/g, new Intl.DateTimeFormat("en-US", { minute: "numeric", hour: "numeric" }).format(new Date()))
@@ -60,7 +62,8 @@ export default class Line {
 			)
 			.replace(/\{gpuName\}/g, `${(await graphics()).controllers[0].model}`)
 			.replace(/\{ramTotal\}/g, `${((await mem()).total / 1.074e+9).toFixed(2)}GiB`)
-			.replace(/\{ramUsed\}/g, `${((await mem()).active / 1.074e+9).toFixed(2)}GiB`);
+			.replace(/\{ramUsed\}/g, `${((await mem()).active / 1.074e+9).toFixed(2)}GiB`)
+			.replace(/\{ramPercentage\}/g, `${((ramUsed / ramTotal) * 100).toFixed(1)}%`)
 		msg = `${msg}${client.config.minimalBackground ? "\u0003\u001f" : ""}`;
 
 		// BETTER WAY: get remaining available length before and put it there using regex                                                

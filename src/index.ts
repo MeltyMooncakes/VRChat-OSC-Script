@@ -4,6 +4,7 @@ import { OSCChatbox } from "./chatbox";
 import osc from "node-osc"
 import Music from "./music";
 import Line from "./config";
+import { parse } from "smol-toml";
 
 export class Client {
 	// @ts-ignore
@@ -16,9 +17,10 @@ export class Client {
 	config: ConfigData;
 	chatbox: OSCChatbox;
 	interval: NodeJS.Timer;
-
+		
 	constructor() {
-		this.config = JSON.parse(readFileSync("./config.json", "utf-8"));
+		// @ts-expect-error
+		this.config = parse(readFileSync("./config.json", "utf-8"));
 
 		this.chatbox = new OSCChatbox(this);
 		this.music = new Music(this.config);
