@@ -11,9 +11,15 @@ export default class Line {
 	messageIndex = 0;
 
 	constructor(data: ConfigLine) {
-		this.messages = data.messages;
-		this.interval = data.interval;
-		this.order = data.order;
+		if ("message" in data !== false) {
+			this.messages = [data.message];
+			this.interval = 1e3;
+			this.order = "normal";
+		} else {
+			this.messages = data.messages;
+			this.interval = data.interval;
+			this.order = data.order;
+		}
 	}
 
 	getMessage() {

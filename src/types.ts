@@ -1,10 +1,16 @@
 type ConfigOrder = "normal" | "reverse" | "random" | string;
 
-interface ConfigLine {
+interface ConfigLineObjectA {
 	interval: number;
 	order: ConfigOrder;
 	messages: string[];
 };
+
+interface ConfigLineObjectB {
+	message: string;
+}
+
+type ConfigLine = ConfigLineObjectA | ConfigLineObjectB;
 
 interface ConfigData {
 	/**

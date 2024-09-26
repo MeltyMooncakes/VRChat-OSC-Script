@@ -14,20 +14,11 @@ messages = [					# The messages
 	"i am BITING YOU"
 ]
 
+[[lines]]
+message = "{time} | CPU: {cpuTemp} | RAM: {ramPercentage}"
 
 [[lines]]
-interval = 1e3
-order = "normal"
-messages = [
-	"{time} | CPU: {cpuTemp} | RAM: {ramPercentage}",
-]
-
-[[lines]]
-interval = 1e3
-order = "normal"
-messages = [
-	"music"
-]
+message = "{music}"
 
 [[lines]]
 interval = 5e3
