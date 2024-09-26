@@ -18,7 +18,7 @@ class _BlankSong {
 	stringLength = "0:00";
 }
 
-const BlankSong = new _BlankSong();
+export const BlankSong = new _BlankSong();
 
 export class Song {
 	title: string;
