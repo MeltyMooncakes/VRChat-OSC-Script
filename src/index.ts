@@ -1,7 +1,6 @@
 
 import { readFileSync } from "fs";
-import { OSCChatbox } from "./chatbox";
-import osc from "node-osc"
+import osc, { Message } from "node-osc"
 import Music from "./music";
 import Line from "./config";
 import { parse } from "smol-toml";
@@ -15,14 +14,12 @@ export class Client {
 	
 	music: Music;
 	config: ConfigData;
-	chatbox: OSCChatbox;
 	interval: NodeJS.Timer;
 		
 	constructor() {
 		// @ts-expect-error
 		this.config = parse(readFileSync("./config.toml", "utf-8"));
 
-		this.chatbox = new OSCChatbox(this);
 		this.music = new Music(this.config);
 
 
@@ -35,10 +32,19 @@ export class Client {
 
 			if ((Date.now() - this.lastSent) > 1500) {
 				this.lastSent = Date.now();
-				this.chatbox.send(`${await Line.formatMessage(this, lines.map(l => l.getMessage()).join("\n"))}`, true);
+				this.send(`${await Line.formatMessage(this, lines.map(l => l.getMessage()).join("\n"))}`, true);
 			}
 		}, 100);
 	}
+	
+
+    sendTyping(bool = true) {
+        this.socket.send(new Message("/chatbox/typing", bool));
+    }
+
+    send(message: string, send = false) {
+        this.socket.send(new Message("/chatbox/input", message, send));
+    }
 };
 
 const client = new Client();
