@@ -1,0 +1,29 @@
+mediaplayer: YoutubeMusic
+minimalBackground: true
+lines:
+
+  - interval: 6000
+    order: normal
+    messages:
+      - silly car
+      - im EVIL
+      - i hate everyone
+      - i am BITING YOU
+
+
+  - message: "{time} | CPU: {cpuTemp} | RAM: {ramPercentage}"
+  - message: "{music}"
+
+
+  - interval: 5000
+    order: normal
+    messages:
+      - "{musicProgressBar}"
+      - "CPU: {cpuName}"
+
+  
+  - order: normal
+    interval: 5000
+    messages:
+      - "{musicPosition}"
+      - "GPU: {gpuName}"

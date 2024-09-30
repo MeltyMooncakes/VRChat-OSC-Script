@@ -3,7 +3,7 @@ import { readFileSync } from "fs";
 import osc, { Message } from "node-osc"
 import Music from "./music";
 import Line from "./config";
-import { parse } from "smol-toml";
+import { parse } from "yaml";
 
 export class Client {
 	// @ts-ignore
@@ -16,9 +16,8 @@ export class Client {
 	config: ConfigData;
 	interval: NodeJS.Timer;
 		
-	constructor() {
-		// @ts-expect-error
-		this.config = parse(readFileSync("./config.toml", "utf-8"));
+	constructor() {	
+		this.config = parse(readFileSync("./config.yaml", "utf-8"));
 
 		this.music = new Music(this.config);
 

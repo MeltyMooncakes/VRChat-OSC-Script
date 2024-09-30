@@ -1,11 +1,10 @@
 {
 	"dependencies": {
-		"@solely/simple-fm": "^1.7.2",
 		"@types/node-osc": "^6.0.3",
 		"dbus-next": "^0.10.2",
 		"node-osc": "^9.1.3",
-		"smol-toml": "^1.3.0",
-		"systeminformation": "^5.23.5"
+		"systeminformation": "^5.23.5",
+		"yaml": "^2.5.1"
 	},
 	"name": "oscjs",
 	"version": "1.0.0",
