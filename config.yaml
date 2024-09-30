@@ -1,5 +1,15 @@
 mediaplayer: YoutubeMusic
 minimalBackground: true
+
+progressBar:
+  length: 12
+  characters: 
+    start: "├"
+    before: "─"
+    thumb: "🔘"
+    after: "─"
+    end: "┤"
+
 lines:
 
   - interval: 6000

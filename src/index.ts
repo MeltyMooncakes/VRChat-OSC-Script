@@ -37,7 +37,6 @@ export class Client {
 			}
 
 			if ((Date.now() - this.lastSent) > 1500) {
-				console.log(Date.now() - this.lastSent);
 				this.lastSent = Date.now();
 				this.send(`${await Line.formatMessage(this, lines.map(l => l.getMessage()).join("\n"))}`, true);
 			}

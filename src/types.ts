@@ -25,9 +25,29 @@ interface ConfigData {
 	mediaplayer: "YoutubeMusic" | "Firefox";
 
 	lines: ConfigLine[];
+
+	progressBar: {
+		characters: ProgressBarCharacters;
+		length: number;
+	};
 };
 
 interface data {
-    baz: number;
-    [key: string]: any;
+	baz: number;
+	[key: string]: any;
+}
+
+interface ProgressBarCharacters {
+	start: "├";
+	before: "─";
+	thumb: "🔘";
+	after: "─";
+	end: "┤";
+}
+
+interface ProgressBarOptions {
+	current: number;
+	total: number;
+	length: number;
+	characters: ProgressBarCharacters
 }

@@ -93,7 +93,12 @@ export default class Line {
 					msg = msg.replace(/\{musicPosition\}/g, `${(await client.music.getPosition()).string}/${song.stringLength}`);
 					break;
 				case "musicProgressBar":
-					msg = msg.replace(/\{musicProgressBar\}/g, `[${makeProgressBar((await client.music.getPosition()).value, song.length, 15)}]`);
+					msg = msg.replace(/\{musicProgressBar\}/g, `${makeProgressBar({
+						characters: client.config.progressBar.characters,
+						current: (await client.music.getPosition()).value, 
+						total: song.length,
+						length: client.config.progressBar.length
+					})}`);
 					break;
 			}
 		}
