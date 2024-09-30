@@ -13,7 +13,7 @@ export class OSCChatbox {
     }
 
     send(message: string, send = false) {
-		// @ts-ignore
+		// @ts-ignore this is some weird ass bug with the thing, idk why it does this despite the syntax being correct but whatever :/
         this.client.socket.send("/chatbox/input", message, send);
     }
 }
