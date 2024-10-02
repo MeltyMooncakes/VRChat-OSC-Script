@@ -9,7 +9,7 @@
 ### Arch
 ```bash
 paru -Sy typescript pnpm nodejs git
-git clone https://github.com/MeltyMoon/VRChat-OSC-Script
+git clone https://github.com/MeltyMooncakes/VRChat-OSC-Script
 cd VRChat-OSC-Script
 pnpm build
 ```
@@ -19,7 +19,7 @@ pnpm build
 Make sure you install [Git](https://git-scm.com/download/win) and [NodeJS](https://nodejs.org/en/download), then run:
 ```cmd
 npm install -G typescript pnpm
-git clone https://github.com/MeltyMoon/VRChat-OSC-Script
+git clone https://github.com/MeltyMooncakes/VRChat-OSC-Script
 cd VRChat-OSC-Script
 pnpm build
 ```
