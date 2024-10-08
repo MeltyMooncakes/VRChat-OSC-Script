@@ -40,5 +40,6 @@ export class Plugins {
 		for (const name of readdirSync("./plugins")) {
 			return await this.load(name);
 		}
+		console.log(`Loaded ${this.plugins.length} plugins`);
 	}
 }		
