@@ -109,6 +109,10 @@ export default class Line {
 				stringB = `${[song?.artist || ""].flat().join(" & ")} - ${song.title}`;
 			msg = msg.replace(/\{music\}/g, `${stringA}${stringB.slice(0, 144 - (msg.length + stringA.length - 7))}`)
 		}
+
+		for (const plugin of client.plugins.plugins) {
+			msg = await plugin.formatMessage(msg);
+		}
 		
 		return msg;
 	}

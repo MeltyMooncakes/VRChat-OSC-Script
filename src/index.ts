@@ -25,7 +25,7 @@ export class Client {
 
 		this.music = new Music(this.config);
 		this.plugins = new Plugins(this);
-		this.plugins.load("OSCJS-PLUGIN-TEMPLATE");
+		this.plugins.loadAllPlugins();
 
 
 		const lines = this.config.lines.map(data => new Line(data));
