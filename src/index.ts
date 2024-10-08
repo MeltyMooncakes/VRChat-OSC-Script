@@ -6,8 +6,8 @@ import { parse } from "yaml";
 import { Plugins } from "./plugins";
 
 export class Client {
-	// @ts-ignore
-	socket = new osc.Client("127.0.0.1", "9000");
+	inSocket = new osc.Client("127.0.0.1", 9000);
+	outSocket = new osc.Server(9001, "127.0.0.1");
 
 	lastSent = 0;
 	enabled = false;
@@ -19,6 +19,8 @@ export class Client {
 	plugins: Plugins;
 	config: ConfigData;
 	interval: NodeJS.Timer;
+
+	properties: objectAny = {};
 
 	constructor() {
 		this.config = parse(readFileSync("./config.yaml", "utf-8"));
@@ -44,17 +46,19 @@ export class Client {
 				this.send(`${await Line.formatMessage(this, lines.map(l => l.getMessage()).join("\n"))}`, true);
 			}
 		}, 100);
-	}
 
+		// I can't think of a better way of doing this right now, sorry.
+		this.outSocket.on("message", m => this.properties[m[0]] = m[1]);
+	}
 
 	/** Starts typing */
 	sendTyping(bool = true) {
-		this.socket.send(new Message("/chatbox/typing", bool));
+		this.inSocket.send(new Message("/chatbox/typing", bool));
 	}
 
 	/** Sends a message */
 	send(message: string, send = false) {
-		this.socket.send(new Message("/chatbox/input", message, send));
+		this.inSocket.send(new Message("/chatbox/input", message, send));
 	}
 
 	/** Times out the interval. */

@@ -32,6 +32,10 @@ interface ConfigData {
 	};
 };
 
+interface objectAny {
+	[key: string]: any;
+}
+
 interface data {
 	baz: number;
 	[key: string]: any;
