@@ -1,7 +1,12 @@
 # Just a silly little script for VRChat OSC Chatbox
 
 
+> Media players will NOT work on windows at the current moment, if you are running windows, please help implement it.
+ Working media players (put in conifg exactly as listed): `VLC`, `YoutubeMusic`
+
 ---
+
+To run, just do `pnpm start`
 
 ## Installing
 
@@ -23,12 +28,8 @@ git clone https://github.com/MeltyMooncakes/VRChat-OSC-Script
 cd VRChat-OSC-Script
 pnpm build
 ```
-
 ---
-## Running
-```bash
-pnpm start
-```
 
-Media players will NOT work on windows at the current moment, if you are running windows, please help implement it.
-Working media players (put in conifg exactly as listed): `VLC`, `YoutubeMusic`
+## Plugins
+To install a plugin, make a plugins folder if there isnt one already and clone the repository for the plugin in there.<br>
+Please use the [Plugin Template](https://github.com/MeltyMooncakes/VRCOSC-Script-Plugin-Template/tree/master) for plugins.
