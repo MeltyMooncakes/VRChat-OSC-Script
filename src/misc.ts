@@ -17,7 +17,7 @@ export function makeProgressBar(options: ProgressBarOptions): string {
 
 	const p = options.current / options.total,
 		c = p * options.length;
-		
+
 	return options.characters.start
 		+ options.characters.before.repeat(Math.max(c - 1, 0))
 		+ (c > 1 ? options.characters.thumb : "")
