@@ -7,7 +7,7 @@
 		"yaml": "^2.5.1"
 	},
 	"name": "oscjs",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"description": "VRChat osc thing",
 	"main": "src/index.js",
 	"author": "MeltyMooncakes",
@@ -15,8 +15,8 @@
 	"private": true,
 	"scripts": {
 		"start": "node ./dist/index.js",
-		"test": "tsc && pnpm start",
-		"build": "pnpm install && tsc"
+		"test": "pnpm build && pnpm start",
+		"build": "pnpm install && tsc && ./scripts/buildPlugins.sh"
 	},
 	"devDependencies": {
 		"@types/node": "^22.5.5",
