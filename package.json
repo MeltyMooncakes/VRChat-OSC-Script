@@ -7,7 +7,7 @@
 		"yaml": "^2.5.1"
 	},
 	"name": "oscjs",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "VRChat osc thing",
 	"main": "src/index.js",
 	"author": "MeltyMooncakes",

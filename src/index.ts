@@ -29,10 +29,13 @@ export class Client {
 		this.plugins = new Plugins(this);
 		this.plugins.loadAllPlugins();
 
-
 		const lines = this.config.lines.map(data => new Line(data));
 
 		this.interval = setInterval(async () => {
+			if (!this.config.chatbox) {
+				return;
+			}
+
 			if (this.timeoutLength > 0 && (Date.now() - this.timeoutStart) < this.timeoutLength) {
 				return;
 			}

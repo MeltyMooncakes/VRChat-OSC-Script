@@ -1,5 +1,6 @@
 mediaplayer: YoutubeMusic
 minimalBackground: true
+chatbox: true
 
 progressBar:
   length: 12

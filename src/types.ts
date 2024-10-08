@@ -24,6 +24,11 @@ interface ConfigData {
 	 */
 	mediaplayer: "YoutubeMusic" | "Firefox";
 
+	/**
+	 * Whether the chatbox is enabled.
+	 */
+	chatbox: boolean;
+
 	lines: ConfigLine[];
 
 	progressBar: {
