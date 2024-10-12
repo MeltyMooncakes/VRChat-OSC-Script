@@ -1,4 +1,4 @@
-import { readdirSync } from "fs";
+import { existsSync, mkdirSync, readdirSync } from "fs";
 import { Client } from ".";
 
 class Plugin {
@@ -37,6 +37,10 @@ export class Plugins {
 	async loadAllPlugins() {
 		console.log(`Loading all plugins...`);
 
+		if (!existsSync("./plugins")) {
+			mkdirSync("./plugins");
+		}
+		
 		for (const name of readdirSync("./plugins")) {
 			return await this.load(name);
 		}
