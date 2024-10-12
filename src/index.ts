@@ -23,7 +23,7 @@ export class Client {
 	properties: objectAny = {};
 
 	constructor() {
-		this.config = parse(readFileSync("./config.yaml", "utf-8"));
+		this.config = parse(readFileSync("./configs/config.yaml", "utf-8"));
 
 		this.music = new Music(this.config);
 		this.plugins = new Plugins(this);
