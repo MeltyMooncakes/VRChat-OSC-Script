@@ -51,7 +51,12 @@ export class Client {
 		}, 100);
 
 		// I can't think of a better way of doing this right now, sorry.
-		this.outSocket.on("message", m => this.properties[m[0]] = m[1]);
+		this.outSocket.on("message", m => {
+			this.properties[m[0]] = m[1];
+			if (this.properties?.["/avatar/change"] !== void 0) {
+				this.properties = {};
+			}
+		});
 	}
 
 	/** Starts typing */

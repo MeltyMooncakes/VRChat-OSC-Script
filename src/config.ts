@@ -95,10 +95,17 @@ export default class Line {
 				case "musicProgressBar":
 					msg = msg.replace(/\{musicProgressBar\}/g, `${makeProgressBar({
 						characters: client.config.progressBar.characters,
-						current: (await client.music.getPosition()).value, 
+						current: (await client.music.getPosition()).value,
 						total: song.length,
 						length: client.config.progressBar.length
 					})}`);
+					break;
+				case "pluginList":
+					console.log(client.plugins.plugins);
+					msg = msg.replace(/\{pluginList\}/g, `${client.plugins.plugins.map(p => p.name).join(", ")}`);
+					break;
+				case "pluginCount":
+					msg = msg.replace(/\{pluginCount\}/g, `${client.plugins.plugins.length}`);
 					break;
 			}
 		}
@@ -113,7 +120,7 @@ export default class Line {
 		for (const plugin of client.plugins.plugins) {
 			msg = await plugin.formatMessage(msg);
 		}
-		
+
 		return msg;
 	}
 }

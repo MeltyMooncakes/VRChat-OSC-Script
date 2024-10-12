@@ -4,12 +4,14 @@ import { Client } from ".";
 class Plugin {
 	// @ts-ignore
 	client: Client;
+
+	name: string;
 	// @ts-ignore
 	constructor(client: Client) {
 		this.client = client;
 	}
-	
-	async start() {};
+
+	async start() { };
 
 	async formatMessage(message: string): Promise<string> {
 		return message;
@@ -29,6 +31,9 @@ export class Plugins {
 		const { Plugin } = await import(`../plugins/${name}/dist/index.js`),
 			plugin = new Plugin(this.client);
 
+		plugin.name = name;
+		this.plugins.push(plugin);
+
 		console.log(`Loaded plugin: ${name}`);
 
 		plugin.start();
@@ -40,7 +45,7 @@ export class Plugins {
 		if (!existsSync("./plugins")) {
 			mkdirSync("./plugins");
 		}
-		
+
 		for (const name of readdirSync("./plugins")) {
 			return await this.load(name);
 		}
