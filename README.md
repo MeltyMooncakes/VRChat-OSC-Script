@@ -31,5 +31,10 @@ pnpm build
 ---
 
 ## Plugins
-To install a plugin, make a plugins folder if there isnt one already and clone the repository for the plugin in there.<br>
-Please use the [Plugin Template](https://github.com/MeltyMooncakes/VRCOSC-Script-Plugin-Template/tree/master) for plugins.
+Please use the [Plugin Template](https://github.com/MeltyMooncakes/VRCOSC-Script-Plugin-Template/tree/master) to make plugins.
+
+### Installation
+To install a plugin, Clone the repository into the plugins folder and run `pnpm build`.
+
+### Uninstalling
+Run the command `pnpm removePlugin PLUGIN-NAME`, please do not just delete the folder as runnning the command cleans up the unneeded dependancies.
