@@ -106,10 +106,11 @@ export default class Music {
 		await this.getInterface();
 		if (this.hasInterface) {
 			let pos = 0;
-			if (this.platform === "linux") {
-				pos = Number((await this.interface.Get("org.mpris.MediaPlayer2.Player", "Position")).value / 1000n);
-			} else {
+			if (this.platform !== "linux") {
+
 				pos = this.windowsMusic?.position;
+			} else {
+				pos = Number((await this.interface.Get("org.mpris.MediaPlayer2.Player", "Position")).value / 1000n);
 			}
 
 			return {
