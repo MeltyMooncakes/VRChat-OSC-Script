@@ -39,11 +39,10 @@ export class WindowsMusic {
 	}
 
 	getSong() {
-		console.log(this.metadata);
 		const length = (this.metadata?.length || 0) * 1000;
 		return {
-			album: this.metadata.album,
-			artist: this.metadata.artists,
+			album: this.metadata?.album || "Unknown",
+			artist: this.metadata?.artists || ["Unknown"],
 			length,
 			stringLength: msToString(length),
 			title: this.metadata?.title || "Unknown Song",
