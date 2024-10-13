@@ -75,10 +75,10 @@ export default class Line {
 					msg = msg.replace(/\{cpuTemp\}/g, `${(await cpuTemperature()).main}°C`);
 					break;
 				case "cpuName":
-					msg = msg.replace(/\{cpuName\}/g, `${(await cpu()).brand}`.replace(/([0-9]+\-core|processor)/gi, ""));
+					msg = msg.replace(/\{cpuName\}/g, `${(await cpu())?.brand}`.replace(/([0-9]+\-core|processor)/gi, ""));
 					break;
 				case "gpuName":
-					msg = msg.replace(/\{gpuName\}/g, `${(await graphics()).controllers[0].model}`);
+					msg = msg.replace(/\{gpuName\}/g, `${(await graphics())?.controllers?.[0]?.model}`);
 					break;
 				case "ramTotal":
 					msg = msg.replace(/\{ramTotal\}/g, `${ramTotal}GiB`);
