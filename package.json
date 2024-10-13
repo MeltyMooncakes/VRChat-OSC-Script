@@ -17,7 +17,8 @@
 	"scripts": {
 		"start": "node ./dist/index.js",
 		"test": "pnpm build && pnpm start",
-		"build": "pnpm install && tsc && ./scripts/buildPlugins.sh"
+		"build": "pnpm install && tsc && ./scripts/buildPlugins.sh",
+		"retry": "git pull; pnpm test"
 	},
 	"devDependencies": {
 		"@types/node": "^22.5.5",
