@@ -39,9 +39,10 @@ export class WindowsMusic {
 	}
 
 	getSong() {
+		console.log(this.metadata);
 		const length = (this.metadata?.length || 0) * 1000;
 		return {
-			album: this.metadata.album || "Unknown Album",
+			album: this.metadata.album,
 			artist: this.metadata.artists,
 			length,
 			stringLength: msToString(length),
@@ -68,7 +69,6 @@ export class WindowsMusic {
 	updateStatus(status: Status) {
 		if (status?.metadata !== void 0) {
 			this.metadata = status.metadata;
-			console.log(this.metadata);
 		}
 		if (status?.status !== void 0) {
 			// @ts-ignore
