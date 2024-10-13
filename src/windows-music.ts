@@ -67,12 +67,16 @@ export class WindowsMusic {
 	}
 
 	updateStatus(status: Status) {
+		console.log("h");
 		if (status?.metadata !== void 0 && status.metadata.length !== 0) {
 			this.metadata = status.metadata;
 		}
+
 		if (status?.status !== void 0) {
 			// @ts-ignore
 			this.playbackStatus = WindowsPlaybackStatus[status.status];
 		}
+
+		console.log(this.metadata);
 	}
 }
