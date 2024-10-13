@@ -67,13 +67,15 @@ export default class Music {
 
 	async getInterface() {
 		if (this.platform !== "linux") {
-			try {
-				const { WindowsMusic } = await import(`${__dirname}/windows-music.js`);
-				this.windowsMusic = new WindowsMusic();
-				console.log(this.windowsMusic);
-				this.hasInterface = true;
-			} catch (e) {
-				this.hasInterface = false;
+			if (!this.hasInterface) {
+				try {
+					const { WindowsMusic } = await import(`${__dirname}/windows-music.js`);
+					this.windowsMusic = new WindowsMusic();
+					console.log(this.windowsMusic);
+					this.hasInterface = true;
+				} catch (e) {
+					this.hasInterface = false;
+				}
 			}
 			return;
 		}
