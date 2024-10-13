@@ -70,6 +70,7 @@ export default class Music {
 			if (!this.hasInterface) {
 				try {
 					const { WindowsMusic } = await import(`${__dirname}/windows-music.js`);
+					this.windowsMusic = new WindowsMusic();
 					this.hasInterface = true;
 				} catch (e) {
 					this.hasInterface = false;
