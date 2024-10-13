@@ -1,7 +1,7 @@
 # Just a silly little script for VRChat OSC Chatbox
 
 
-> Media players will NOT work on windows at the current moment, if you are running windows, please help implement it.
+> Media players semi-work, if you run into a bug please make an issue on the github page.
  Working media players (put in conifg exactly as listed): `VLC`, `YoutubeMusic`
 
 ---

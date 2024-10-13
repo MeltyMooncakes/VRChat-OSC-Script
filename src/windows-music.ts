@@ -2,19 +2,6 @@ import winplayer, { Status, Position, WinPlayer } from "@innei/winplayer-rs/emit
 import { Song } from "./music";
 import { msToString } from "./misc";
 
-const blankMetadata: Metadata = {
-	album: "Unknown",
-	albumArtist: "Unknown",
-	albumArtists: ["Unknown"],
-	artist: "Unknown",
-	artists: ["Unknown"],
-	artData: undefined,
-	id: "Unknown",
-	length: 0,
-	title: "Unknown",
-}
-
-
 // I fucking hate this.
 const WindowsPlaybackStatus = {
 	"GlobalSystemMediaTransportControlsSessionPlaybackStatus(0)": "Closed",
