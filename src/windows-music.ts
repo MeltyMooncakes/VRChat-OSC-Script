@@ -54,10 +54,21 @@ export class WindowsMusic {
 	async init() {
 		this.playerManager = await winplayer();
 
+		const status = ((status: Status) => {
+			console.log("h");
+			if (status.metadata !== undefined) {
+				this.metadata = status.metadata;
+			}
+
+			if (status?.status !== void 0) {
+				// @ts-ignore
+				this.playbackStatus = WindowsPlaybackStatus[status.status];
+			}
+		}).bind(this);
 		if (this.playerManager) {
 			this.playerManager
-				.on("PlaybackInfoChanged", Object.bind(this, this.updateStatus))
-				.on("MediaPropertiesChanged", Object.bind(this, this.updateStatus))
+				.on("PlaybackInfoChanged", status)
+				.on("MediaPropertiesChanged", status)
 				.on("TimelinePropertiesChanged", (position: Position) => {
 					if (position !== undefined) {
 						this.position = position.howMuch * 1000;
