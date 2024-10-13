@@ -99,7 +99,7 @@ export default class Music {
 		await this.getInterface();
 		if (this.hasInterface) {
 			if (this.platform !== "linux") {
-				return this.windowsMusic.song;
+				return this.windowsMusic.getSong();
 			} else {
 				return new Song(await this.getProperty("Metadata"));
 			}

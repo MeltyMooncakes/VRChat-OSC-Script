@@ -38,7 +38,7 @@ export class WindowsMusic {
 		this.init();
 	}
 
-	get song(): Song {
+	getSong() {
 		const length = (this.metadata?.length || 0) * 1000;
 		return {
 			album: this.metadata.album || "Unknown Album",
