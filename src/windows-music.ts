@@ -35,7 +35,6 @@ export class WindowsMusic {
 	playbackStatus: PlaybackStatus;
 
 	constructor() {
-		this.metadata = blankMetadata;
 		this.init();
 	}
 
