@@ -67,6 +67,7 @@ export class WindowsMusic {
 
 	updateStatus(status: Status) {
 		if (status?.metadata !== void 0) {
+			console.log("h");
 			this.metadata = status.metadata;
 		}
 		if (status?.status !== void 0) {
