@@ -29,12 +29,13 @@ const WindowsPlaybackStatus = {
 
 export class WindowsMusic {
 	playerManager: WinPlayer | undefined;
-	metadata: Metadata = blankMetadata;
+	metadata: Metadata;
 	position: number = 0;
 
 	playbackStatus: PlaybackStatus;
 
 	constructor() {
+		this.metadata = blankMetadata;
 		this.init();
 	}
 
@@ -76,7 +77,5 @@ export class WindowsMusic {
 			// @ts-ignore
 			this.playbackStatus = WindowsPlaybackStatus[status.status];
 		}
-
-		console.log(this.metadata);
 	}
 }
