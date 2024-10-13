@@ -2,7 +2,6 @@ import { ClientInterface, MessageBus, ProxyObject, sessionBus } from "dbus-next"
 import { msToString } from "./misc";
 import { platform } from "os";
 
-
 const MusicPlayerTypes = {
 	"YoutubeMusic": "org.mpris.MediaPlayer2.YoutubeMusic",
 	"Firefox": "org.mpris.MediaPlayer2.Firefox",
@@ -58,6 +57,7 @@ export default class Music {
 			this.bus = sessionBus();
 			this.getInterface();
 		} else {
+			this.getInterface();
 			console.warn("NOTE: Music information is not currently supported on windows.");
 		}
 	}
@@ -66,9 +66,11 @@ export default class Music {
 
 	async getInterface() {
 		if (this.platform !== "linux") {
+			const { getPlayer } = await import(`${__dirname}/windows-music,js`);
+			console.log(await (await getPlayer()).getStatus());
 			return;
 		}
-		
+
 		try {
 			const proxy = await this.bus.getProxyObject(MusicPlayerTypes[this.config.mediaplayer], "/org/mpris/MediaPlayer2");
 			this.hasInterface = true;
@@ -98,7 +100,7 @@ export default class Music {
 		await this.getInterface();
 		if (this.hasInterface) {
 			const pos = Number((await this.interface.Get("org.mpris.MediaPlayer2.Player", "Position")).value / 1000n);
-	
+
 			return {
 				value: pos,
 				string: msToString(pos),
