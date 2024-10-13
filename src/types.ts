@@ -58,5 +58,30 @@ interface ProgressBarOptions {
 	current: number;
 	total: number;
 	length: number;
-	characters: ProgressBarCharacters
+	characters: ProgressBarCharacters;
 }
+
+interface ArtData {
+	data: Buffer;
+	mimetype: string;
+}
+
+interface Metadata {
+	album?: string;
+	albumArtist?: string;
+	albumArtists?: Array<string>;
+	artist: string;
+	artists: Array<string>;
+	artData?: ArtData;
+	id?: string;
+	length: number;
+	title: string;
+}
+
+type PlaybackStatus =
+	"Closed"
+	| "Opened"
+	| "Changing"
+	| "Stopped"
+	| "Playing"
+	| "Paused";

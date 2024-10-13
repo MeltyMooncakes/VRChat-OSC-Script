@@ -49,6 +49,7 @@ export default class Music {
 	config: ConfigData;
 	platform = platform();
 	bus: MessageBus;
+	windowsMusic: objectAny;
 
 	constructor(config: ConfigData) {
 		this.config = config;
@@ -66,8 +67,13 @@ export default class Music {
 
 	async getInterface() {
 		if (this.platform !== "linux") {
-			const { getPlayer } = await import(`${__dirname}/windows-music.js`);
-			console.log(await (await getPlayer()));
+			try {
+				const { WindowsMusic } = await import(`${__dirname}/windows-music.js`);
+				this.windowsMusic = new WindowsMusic();
+				this.hasInterface = true;
+			} catch (e) {
+				this.hasInterface = false;
+			}
 			return;
 		}
 
@@ -99,7 +105,12 @@ export default class Music {
 	async getPosition() {
 		await this.getInterface();
 		if (this.hasInterface) {
-			const pos = Number((await this.interface.Get("org.mpris.MediaPlayer2.Player", "Position")).value / 1000n);
+			let pos = 0;
+			if (this.platform === "linux") {
+				pos = Number((await this.interface.Get("org.mpris.MediaPlayer2.Player", "Position")).value / 1000n);
+			} else {
+				pos = this.windowsMusic?.position;
+			}
 
 			return {
 				value: pos,
