@@ -1,4 +1,6 @@
 import winplayer, { Status, Position, WinPlayer } from "@innei/winplayer-rs/emitter";
+import { Song } from "./music";
+import { msToString } from "./misc";
 
 const blankMetadata: Metadata = {
 	album: "Unknown",
@@ -36,6 +38,18 @@ export class WindowsMusic {
 		this.init();
 	}
 
+	get song(): Song {
+		const length = (this.metadata?.length || 0) * 1000;
+		return {
+			album: this.metadata.album || "Unknown Album",
+			artist: this.metadata.artists,
+			length,
+			stringLength: msToString(length),
+			title: this.metadata?.title || "Unknown Song",
+			url: "unknown"
+		};
+	}
+
 	async init() {
 		this.playerManager = await winplayer();
 
@@ -44,8 +58,6 @@ export class WindowsMusic {
 				.on("PlaybackInfoChanged", this.updateStatus)
 				.on("MediaPropertiesChanged", this.updateStatus)
 				.on("TimelinePropertiesChanged", (position: Position) => {
-					console.log(position);
-					console.log(this.position);
 					if (position !== undefined) {
 						this.position = position.howMuch * 1000;
 					}

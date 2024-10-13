@@ -33,6 +33,7 @@ export class Client {
 
 		this.interval = setInterval(async () => {
 			try {
+				console.log(await this.music.getSong());
 				console.log(await this.music.getPosition());
 			} catch (e) {
 				console.log(e);

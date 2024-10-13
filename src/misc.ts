@@ -2,6 +2,9 @@ export const musicEmojis = {
 	Playing: "\u25B6",
 	Paused: "⏸",
 	Stopped: "⏹",
+	Closed: "⏹",
+	Opened: "⏸",
+	Changing: "⏹",
 };
 
 export function msToString(ms: number): string {

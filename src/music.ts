@@ -70,8 +70,6 @@ export default class Music {
 			if (!this.hasInterface) {
 				try {
 					const { WindowsMusic } = await import(`${__dirname}/windows-music.js`);
-					this.windowsMusic = new WindowsMusic();
-					console.log(this.windowsMusic);
 					this.hasInterface = true;
 				} catch (e) {
 					this.hasInterface = false;
@@ -100,7 +98,11 @@ export default class Music {
 	async getSong() {
 		await this.getInterface();
 		if (this.hasInterface) {
-			return new Song(await this.getProperty("Metadata"));
+			if (this.platform !== "linux") {
+				return this.windowsMusic.song;
+			} else {
+				return new Song(await this.getProperty("Metadata"));
+			}
 		}
 		return BlankSong;
 	}
@@ -127,10 +129,14 @@ export default class Music {
 		};
 	}
 
-	async getPlaybackStatus(): Promise<"Playing" | "Paused" | "Stopped"> {
+	async getPlaybackStatus(): Promise<PlaybackStatus> {
 		await this.getInterface();
 		if (this.hasInterface) {
-			return (await this.interface.Get("org.mpris.MediaPlayer2.Player", "PlaybackStatus")).value;
+			if (this.platform === "linux") {
+				return (await this.interface.Get("org.mpris.MediaPlayer2.Player", "PlaybackStatus")).value;
+			} else {
+				return this.windowsMusic.playbackStatus;
+			}
 		}
 
 		return "Stopped";
