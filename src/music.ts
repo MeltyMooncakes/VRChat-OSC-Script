@@ -66,7 +66,7 @@ export default class Music {
 
 	async getInterface() {
 		if (this.platform !== "linux") {
-			const { getPlayer } = await import(`${__dirname}/windows-music,js`);
+			const { getPlayer } = await import(`${__dirname}/windows-music.js`);
 			console.log(await (await getPlayer()).getStatus());
 			return;
 		}

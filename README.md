@@ -23,7 +23,7 @@ pnpm build
 ### Windows
 Make sure you install [Git](https://git-scm.com/download/win) and [NodeJS](https://nodejs.org/en/download), then run:
 ```cmd
-npm install -G typescript pnpm
+npm install -G typescript pnpm @pnpm/exe
 git clone https://github.com/MeltyMooncakes/VRChat-OSC-Script
 cd VRChat-OSC-Script
 pnpm build
