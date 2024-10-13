@@ -56,8 +56,8 @@ export class WindowsMusic {
 
 		if (this.playerManager) {
 			this.playerManager
-				.on("PlaybackInfoChanged", this.updateStatus)
-				.on("MediaPropertiesChanged", this.updateStatus)
+				.on("PlaybackInfoChanged", Object.bind(this, this.updateStatus))
+				.on("MediaPropertiesChanged", Object.bind(this, this.updateStatus))
 				.on("TimelinePropertiesChanged", (position: Position) => {
 					if (position !== undefined) {
 						this.position = position.howMuch * 1000;
