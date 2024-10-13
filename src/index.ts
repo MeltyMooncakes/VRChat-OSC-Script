@@ -33,7 +33,7 @@ export class Client {
 
 		this.interval = setInterval(async () => {
 			try {
-				console.log(this.music.windowsMusic.metadata);
+				// console.log(this.music.windowsMusic.metadata);
 				// console.log(await this.music.getSong());
 				// console.log(await this.music.getPosition());
 			} catch (e) {
