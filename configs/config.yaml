@@ -1,6 +1,7 @@
 mediaplayer: YoutubeMusic
 minimalBackground: true
 chatbox: true
+sendInterval: 15e3
 
 progressBar:
   length: 12

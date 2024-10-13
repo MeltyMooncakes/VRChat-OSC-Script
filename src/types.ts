@@ -31,6 +31,8 @@ interface ConfigData {
 
 	lines: ConfigLine[];
 
+	sendInterval: number; 
+
 	progressBar: {
 		characters: ProgressBarCharacters;
 		length: number;

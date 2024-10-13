@@ -50,7 +50,7 @@ export class Client {
 				line.getMessage();
 			}
 
-			if ((Date.now() - this.lastSent) > 1500) {
+			if ((Date.now() - this.lastSent) > this.config.sendInterval) {
 				this.lastSent = Date.now();
 				this.send(`${await Line.formatMessage(this, lines.map(l => l.getMessage()).join("\n"))}`, true);
 			}
