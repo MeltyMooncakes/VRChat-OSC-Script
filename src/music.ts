@@ -70,6 +70,7 @@ export default class Music {
 			try {
 				const { WindowsMusic } = await import(`${__dirname}/windows-music.js`);
 				this.windowsMusic = new WindowsMusic();
+				console.log(this.windowsMusic);
 				this.hasInterface = true;
 			} catch (e) {
 				this.hasInterface = false;
@@ -107,7 +108,6 @@ export default class Music {
 		if (this.hasInterface) {
 			let pos = 0;
 			if (this.platform !== "linux") {
-
 				pos = this.windowsMusic?.position;
 			} else {
 				pos = Number((await this.interface.Get("org.mpris.MediaPlayer2.Player", "Position")).value / 1000n);

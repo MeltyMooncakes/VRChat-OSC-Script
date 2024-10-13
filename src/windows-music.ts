@@ -44,6 +44,8 @@ export class WindowsMusic {
 				.on("PlaybackInfoChanged", this.updateStatus)
 				.on("MediaPropertiesChanged", this.updateStatus)
 				.on("TimelinePropertiesChanged", (position: Position) => {
+					console.log(position);
+					console.log(this.position);
 					if (position !== undefined) {
 						this.position = position.howMuch * 1000;
 					}
