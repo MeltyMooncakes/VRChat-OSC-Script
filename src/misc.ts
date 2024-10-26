@@ -7,6 +7,17 @@ export const musicEmojis = {
 	Changing: "⏹",
 };
 
+// I fucking hate this.
+export const WindowsPlaybackStatus = {
+	"GlobalSystemMediaTransportControlsSessionPlaybackStatus(0)": "Closed",
+	"GlobalSystemMediaTransportControlsSessionPlaybackStatus(1)": "Opened",
+	"GlobalSystemMediaTransportControlsSessionPlaybackStatus(2)": "Changing",
+	"GlobalSystemMediaTransportControlsSessionPlaybackStatus(3)": "Stopped",
+	"GlobalSystemMediaTransportControlsSessionPlaybackStatus(4)": "Playing",
+	"GlobalSystemMediaTransportControlsSessionPlaybackStatus(5)": "Paused",
+};
+
+
 export function msToString(ms: number): string {
 	const m = ms / 60000,
 		s = `${Math.round((m - Math.trunc(m)) * 60)}`;

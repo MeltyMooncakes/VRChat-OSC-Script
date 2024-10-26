@@ -1,16 +1,5 @@
 import winplayer, { Status, Position, WinPlayer } from "@innei/winplayer-rs/emitter";
-import { Song } from "./music";
-import { msToString } from "./misc";
-
-// I fucking hate this.
-const WindowsPlaybackStatus = {
-	"GlobalSystemMediaTransportControlsSessionPlaybackStatus(0)": "Closed",
-	"GlobalSystemMediaTransportControlsSessionPlaybackStatus(1)": "Opened",
-	"GlobalSystemMediaTransportControlsSessionPlaybackStatus(2)": "Changing",
-	"GlobalSystemMediaTransportControlsSessionPlaybackStatus(3)": "Stopped",
-	"GlobalSystemMediaTransportControlsSessionPlaybackStatus(4)": "Playing",
-	"GlobalSystemMediaTransportControlsSessionPlaybackStatus(5)": "Paused",
-};
+import { msToString, WindowsPlaybackStatus } from "./misc";
 
 // length is in seconds
 
@@ -41,7 +30,6 @@ export class WindowsMusic {
 		this.playerManager = await winplayer();
 
 		const status = ((status: Status) => {
-			console.log("h");
 			if (status.metadata !== undefined) {
 				this.metadata = status.metadata;
 			}
@@ -51,6 +39,7 @@ export class WindowsMusic {
 				this.playbackStatus = WindowsPlaybackStatus[status.status];
 			}
 		}).bind(this);
+		
 		if (this.playerManager) {
 			this.playerManager
 				.on("PlaybackInfoChanged", status)
@@ -64,7 +53,6 @@ export class WindowsMusic {
 	}
 
 	updateStatus(status: Status) {
-		console.log("h");
 		if (status.metadata !== undefined) {
 			this.metadata = status.metadata;
 		}
