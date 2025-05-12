@@ -3,6 +3,15 @@ import { msToString, WindowsPlaybackStatus } from "./misc";
 
 // length is in seconds
 
+const metadataEmpty = {
+	album: "Unknown",
+	artist: ["Unknown"],
+	0,
+	stringLength: "00:00:00",
+	title: "Unknown Song",
+	url: "unknown"
+};
+
 export class WindowsMusic {
 	playerManager: WinPlayer | undefined;
 	metadata: Metadata;
@@ -30,9 +39,7 @@ export class WindowsMusic {
 		this.playerManager = await winplayer();
 
 		const status = ((status: Status) => {
-			if (status.metadata !== undefined) {
-				this.metadata = status.metadata;
-			}
+			this.metadata = Object.apply(metadataEmpty, status?.metadata || {});
 
 			if (status?.status !== void 0) {
 				// @ts-ignore
