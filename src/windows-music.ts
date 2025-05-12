@@ -6,7 +6,7 @@ import { msToString, WindowsPlaybackStatus } from "./misc";
 const metadataEmpty = {
 	album: "Unknown",
 	artist: ["Unknown"],
-	0,
+	length: 0,
 	stringLength: "00:00:00",
 	title: "Unknown Song",
 	url: "unknown"
