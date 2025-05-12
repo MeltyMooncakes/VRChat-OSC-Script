@@ -32,12 +32,6 @@ export class Client {
 		const lines = this.config.lines.map(data => new Line(data));
 
 		this.interval = setInterval(async () => {
-			try {
-				console.log(await this.music.getSong());
-				console.log(await this.music.getPosition());
-			} catch (e) {
-				console.log(e);
-			}
 			if (!this.config.chatbox) {
 				return;
 			}
