@@ -39,6 +39,7 @@ export class WindowsMusic {
 		this.playerManager = await winplayer();
 
 		const status = ((status: Status) => {
+			// @ts-ignore
 			this.metadata = Object.apply(metadataEmpty, status?.metadata || {});
 			// @ts-ignore
 			this.playbackStatus = WindowsPlaybackStatus?.[status.status] || "Stopped";
