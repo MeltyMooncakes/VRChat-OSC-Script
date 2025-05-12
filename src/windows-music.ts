@@ -40,11 +40,8 @@ export class WindowsMusic {
 
 		const status = ((status: Status) => {
 			this.metadata = Object.apply(metadataEmpty, status?.metadata || {});
-
-			if (status?.status !== void 0) {
-				// @ts-ignore
-				this.playbackStatus = WindowsPlaybackStatus[status.status];
-			}
+			// @ts-ignore
+			this.playbackStatus = WindowsPlaybackStatus?.[status.status] || "Stopped";
 		}).bind(this);
 		
 		if (this.playerManager) {
